@@ -17,6 +17,12 @@ func NewArticlesService(db *gorm.DB) *ArticlesService {
 
 func (s *ArticlesService) GetAll() ([]models.Article, error) {
 	var articles []models.Article
-	s.db.Find(&articles)
-	return articles, nil
+	err := s.db.Find(&articles).Error
+	return articles, err
+}
+
+func (s *ArticlesService) GetByID(id uint) (models.Article, error) {
+	var article models.Article
+	err := s.db.First(&article, id).Error
+	return article, err
 }

@@ -88,3 +88,27 @@ func (s *Suite) Test_ArticlesService_GetAll() {
 	require.NoError(s.T(), err)
 	assert.Equal(s.T(), articles, res)
 }
+
+func (s *Suite) Test_ArticlesService_GetByID() {
+	var (
+		getAllRequest = `SELECT * FROM "articles" WHERE "articles"."id" = $1 AND "articles"."deleted_at" IS NULL ORDER BY "articles"."id" LIMIT 1`
+		a             = models.Article{
+			Model: gorm.Model{
+				ID:        1,
+				DeletedAt: gorm.DeletedAt{},
+				CreatedAt: time.Now(),
+				UpdatedAt: time.Now(),
+			},
+			Title:   "this is title 1",
+			Content: "this is content 1",
+		}
+	)
+	rows := s.mock.NewRows(
+		[]string{"id", "title", "content", "created_at", "updated_at", "deleted_at"},
+	).AddRow(a.ID, a.Title, a.Content, a.CreatedAt, a.UpdatedAt, a.DeletedAt)
+	s.mock.ExpectQuery(regexp.QuoteMeta(getAllRequest)).WithArgs(a.ID).WillReturnRows(rows)
+
+	res, err := s.articlesService.GetByID(a.ID)
+	require.NoError(s.T(), err)
+	assert.Equal(s.T(), a, res)
+}
