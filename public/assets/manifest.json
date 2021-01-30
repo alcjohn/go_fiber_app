@@ -1,0 +1,13 @@
+{
+  "app.js": {
+    "isEntry": true,
+    "isDynamicEntry": false,
+    "file": "app.eb9a4d9e.js",
+    "imports": [],
+    "dynamicImports": [],
+    "facadeModuleId": "app.ts"
+  },
+  "app.css": {
+    "file": "app.06edfe4b.css"
+  }
+}
