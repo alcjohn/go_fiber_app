@@ -9,7 +9,7 @@ type Routes struct{}
 
 func NewRoutes(
 	app *fiber.App,
-	articlesController *controllers.ArticlesController,
+	articlesController controllers.ArticlesController,
 ) *Routes {
 	router := app.Group("/")
 	router.Get("/err", func(ctx *fiber.Ctx) error {

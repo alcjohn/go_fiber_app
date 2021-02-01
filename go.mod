@@ -12,6 +12,7 @@ require (
 	github.com/gofiber/template v1.6.6
 	github.com/jinzhu/gorm v1.9.16
 	github.com/joho/godotenv v1.3.0
+	github.com/smartystreets/goconvey v1.6.4
 	github.com/stretchr/testify v1.6.1
 	gorm.io/driver/postgres v1.0.7
 	gorm.io/gorm v1.20.12
